@@ -1,4 +1,4 @@
-package it.dsibilio.rsocketdemo.config;
+package com.example.productservice.config;
 
 import reactor.core.publisher.Mono;
 
