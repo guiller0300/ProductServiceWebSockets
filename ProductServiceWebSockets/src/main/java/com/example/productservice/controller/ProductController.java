@@ -1,6 +1,7 @@
 package com.example.productservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.rsocket.RSocketRequester;
@@ -26,10 +27,15 @@ import reactor.core.publisher.Mono;
 @RequestMapping("product")
 @CrossOrigin(origins= "*", methods = {RequestMethod.GET, RequestMethod.POST})
 public class ProductController {
-	@Autowired
-	private ProductService service;
-	private Mono<RSocketRequester> requester;
 	
+	private final Mono<RSocketRequester> requester;
+	private final ProductService service;
+	
+	
+	public ProductController(ProductService service, Mono<RSocketRequester> requester) {
+		this.service = service;
+		this.requester = requester;
+	}
 	
 	@GetMapping(value = "all", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public Flux<ProductDto> all(){
