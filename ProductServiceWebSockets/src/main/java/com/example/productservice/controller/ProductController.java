@@ -49,8 +49,14 @@ public class ProductController {
 				.retrieveFlux(ProductDto.class));
 	}
 	
+	@GetMapping(value = "/socket/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	public Mono<ProductDto> byIdSocket(@PathVariable int id){
+		return this.requester.flatMap(r -> r.route("by.id")
+				.data(new ProductRequestDto(id))
+				.retrieveMono(ProductDto.class));
+	}
 	@GetMapping("{id}")
-	public Mono<ResponseEntity<ProductDto>> getProductById(int id){
+	public Mono<ResponseEntity<ProductDto>> getProductById(@PathVariable int id){
 		return this.service.getProductById(id)
 				.map(ResponseEntity::ok)
 				.defaultIfEmpty(ResponseEntity.notFound().build());

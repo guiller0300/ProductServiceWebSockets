@@ -7,6 +7,12 @@ public class ProductRequestDto {
 	private Integer price;
 	private String subscriber;
 	
+	public ProductRequestDto(int id) {
+		this.id = id;
+	}
+	public ProductRequestDto() {
+		super();
+	}
 	public Integer getId() {
 		return id;
 	}
