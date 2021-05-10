@@ -31,7 +31,8 @@ public class ProductSocketController {
 	
 	@MessageMapping("by.id.{id}")
 	public Mono<ProductDto> getProductById(@DestinationVariable int id){
-		return this.service.getProductById(id);
+		return this.service.getProductById(id)
+				.defaultIfEmpty(new ProductDto());
 	}
 	
 	@MessageMapping("number.stream")
