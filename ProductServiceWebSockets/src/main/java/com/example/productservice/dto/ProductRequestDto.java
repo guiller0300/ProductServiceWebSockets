@@ -8,10 +8,11 @@ public class ProductRequestDto {
 	private String subscriber;
 	
 	public ProductRequestDto(int id) {
+		super();
 		this.id = id;
 	}
 	public ProductRequestDto() {
-		super();
+		
 	}
 	public Integer getId() {
 		return id;

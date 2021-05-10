@@ -1,6 +1,8 @@
 package com.example.productservice.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Service;
 
 import com.example.productservice.dto.ProductDto;
@@ -25,7 +27,7 @@ public class ProductService {
 		.map(EntityDtoUtil::toDto);
 	}
 	
-	public Mono<ProductDto> getProductById(final int id){
+	public Mono<ProductDto> getProductById(@DestinationVariable int id){
 			return this.repository.findById(id)
 					.map(EntityDtoUtil::toDto);
 	}

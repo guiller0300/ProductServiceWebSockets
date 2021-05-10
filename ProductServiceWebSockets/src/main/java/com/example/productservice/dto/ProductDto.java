@@ -12,6 +12,24 @@ public class ProductDto {
 	private Integer price;
 	private String subscriber;
 
+	
+	public ProductDto(Integer id, String description, Integer price, String subscriber) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.price = price;
+		this.subscriber = subscriber;
+	}
+	
+	public ProductDto() {}
+	
+	public ProductDto id(ProductDto product) {
+		return new ProductDto(product.getId(),
+				product.getDescription(),
+				product.getPrice(),
+				product.getSubscriber());
+	}
+	
 	public Integer getId() {
 		return id;
 	}

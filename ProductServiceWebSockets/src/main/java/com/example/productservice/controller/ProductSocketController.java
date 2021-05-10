@@ -3,6 +3,7 @@ package com.example.productservice.controller;
 import java.time.Duration;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,11 +29,9 @@ public class ProductSocketController {
 		return this.service.getAll();
 	}   
 	
-	@MessageMapping("by.id")
-	public Mono<ResponseEntity<ProductDto>> getProductById(ProductRequestDto request){
-		return this.service.getProductById(request.getId())
-				.map(ResponseEntity::ok)
-				.defaultIfEmpty(ResponseEntity.notFound().build());
+	@MessageMapping("by.id.{id}")
+	public Mono<ProductDto> getProductById(@DestinationVariable int id){
+		return this.service.getProductById(id);
 	}
 	
 	@MessageMapping("number.stream")

@@ -51,9 +51,9 @@ public class ProductController {
 	
 	@GetMapping(value = "/socket/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public Mono<ProductDto> byIdSocket(@PathVariable int id){
-		return this.requester.flatMap(r -> r.route("by.id")
-				.data(new ProductRequestDto(id))
-				.retrieveMono(ProductDto.class));
+		return this.requester.flatMap(r -> r.route("by.id."+id)
+				.data(new ProductRequestDto())
+				.retrieveMono(ProductDto.class));		
 	}
 	@GetMapping("{id}")
 	public Mono<ResponseEntity<ProductDto>> getProductById(@PathVariable int id){
