@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,10 +30,15 @@ public class ProductSocketController {
 		return this.service.getAll();
 	}   
 	
-	@MessageMapping("by.id.{id}")
-	public Mono<ProductDto> getProductById(@DestinationVariable int id){
-		return this.service.getProductById(id)
+	@MessageMapping("by.id")
+	public Mono<ProductDto> getProductById(ProductRequestDto request){
+		return this.service.getProductById(request.getId())
 				.defaultIfEmpty(new ProductDto());
+	}
+	
+	@MessageMapping("insert.product")
+	public Mono<ProductDto> insertProduct(@Payload Mono<ProductDto> product){
+		return this.service.insertProduct(product);
 	}
 	
 	@MessageMapping("number.stream")

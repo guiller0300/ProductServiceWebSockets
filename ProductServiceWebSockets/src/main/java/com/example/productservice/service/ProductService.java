@@ -27,7 +27,7 @@ public class ProductService {
 		.map(EntityDtoUtil::toDto);
 	}
 	
-	public Mono<ProductDto> getProductById(@DestinationVariable int id){
+	public Mono<ProductDto> getProductById(int id){
 			return this.repository.findById(id)
 					.map(EntityDtoUtil::toDto);
 	}

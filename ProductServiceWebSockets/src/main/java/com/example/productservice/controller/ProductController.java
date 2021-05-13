@@ -42,17 +42,17 @@ public class ProductController {
 		return this.service.getAll();
 	}
 	
-	@GetMapping(value = "/socket/all", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	@GetMapping(value = "/socket/all", produces = MediaType.TEXT_EVENT_STREAM_VALUE) //RSocket Retrieve all
 	public Flux<ProductDto> allBySocket(){
 		return this.requester.flatMapMany(r -> r.route("todos")
 				.data(new ProductRequestDto())
 				.retrieveFlux(ProductDto.class));
 	}
 	
-	@GetMapping(value = "/socket/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+	@GetMapping(value = "/socket/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE) //RSocket Retrieve by id
 	public Mono<ProductDto> byIdSocket(@PathVariable int id){
-		return this.requester.flatMap(r -> r.route("by.id."+id)
-				.data(new ProductRequestDto())
+		return this.requester.flatMap(r -> r.route("by.id")
+				.data(new ProductRequestDto(id))
 				.retrieveMono(ProductDto.class));		
 	}
 	@GetMapping("{id}")
@@ -61,7 +61,13 @@ public class ProductController {
 				.map(ResponseEntity::ok)
 				.defaultIfEmpty(ResponseEntity.notFound().build());
 	}
-	
+	@PostMapping(value = "socket", produces = MediaType.TEXT_EVENT_STREAM_VALUE) //RSocket Insert
+	public Mono<ProductDto> insert(@RequestBody Mono<ProductDto> productDtoMono){
+		return this.requester.flatMap(r -> r.route("insert.product")
+				.data(productDtoMono)
+				.retrieveMono(ProductDto.class));
+		
+	}
 	@PostMapping
 	public Mono<ProductDto> insertProductTable(@RequestBody Mono<ProductDto> productDtoMono){
 		return this.service.insertProduct(productDtoMono);
