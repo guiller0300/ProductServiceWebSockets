@@ -4,17 +4,20 @@ import java.time.LocalDateTime;
 
 import org.springframework.beans.BeanUtils;
 
+import com.example.productservice.dto.NotificacionesDto;
 import com.example.productservice.dto.ProductDto;
 import com.example.productservice.dto.TransactionRequestDto;
 import com.example.productservice.dto.TransactionResponseDto;
 import com.example.productservice.dto.TransactionStatus;
 import com.example.productservice.dto.UserDto;
+import com.example.productservice.entity.Notificacion;
 import com.example.productservice.entity.Products;
 import com.example.productservice.entity.User;
 import com.example.productservice.entity.UserTransaction;
 
 public class EntityDtoUtil {
 	
+	//EntityDto Product
 	public static ProductDto toDto(Products product) {
 		ProductDto dto =  new ProductDto();
 		BeanUtils.copyProperties(product, dto);
@@ -26,6 +29,8 @@ public class EntityDtoUtil {
 		BeanUtils.copyProperties(productDto, product);
 		return product;
 	}
+	
+	//EntityDto User
 	public static UserDto toDto(User user) {
 		UserDto dto =  new UserDto();
 		BeanUtils.copyProperties(user, dto);
@@ -38,6 +43,7 @@ public class EntityDtoUtil {
 		return user;
 	}
 	
+	//EntityDto UserTransaction
 	public static UserTransaction toEntity(TransactionRequestDto requestDto) {
 		UserTransaction ut = new UserTransaction();
 		ut.setUserId(requestDto.getUserId());
@@ -52,5 +58,18 @@ public class EntityDtoUtil {
 		responseDto.setAmount(requestDto.getAmount());
 		responseDto.setStatus(status);
 		return responseDto;
+	}
+	
+	//EntityDto Notificaciones
+	public static NotificacionesDto toDto(Notificacion notificaciones) {
+		NotificacionesDto dto = new NotificacionesDto();
+		BeanUtils.copyProperties(notificaciones, dto);
+		return dto;
+	}
+	
+	public static Notificacion toEntity(NotificacionesDto notificacionesDto) {
+		Notificacion notificaciones = new Notificacion();
+		BeanUtils.copyProperties(notificacionesDto, notificaciones);
+		return notificaciones;
 	}
 }
