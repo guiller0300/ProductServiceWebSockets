@@ -29,7 +29,7 @@ public class NotificacionesController {
 	public Flux<NotificacionesDto> all(){
 		return this.service.getAll();
 	}
-	@GetMapping()
+	@GetMapping
 	public Flux<Notificacion> byIdSocket(@RequestParam("subscriber") String subscriber){
 		return this.service.getAllBySubscriber(subscriber);	
 	}

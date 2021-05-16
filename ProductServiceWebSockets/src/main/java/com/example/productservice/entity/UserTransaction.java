@@ -16,6 +16,7 @@ public class UserTransaction {
 	private Integer userId;
 	private Integer amount;
 	private LocalDateTime transactionDate;
+	
 	public Integer getId() {
 		return id;
 	}

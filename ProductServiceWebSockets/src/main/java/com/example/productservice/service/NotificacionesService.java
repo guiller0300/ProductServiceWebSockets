@@ -23,6 +23,7 @@ public class NotificacionesService {
 	}
 	
 	public Flux<Notificacion> getAllBySubscriber(String subscriber){
+		System.out.println(subscriber);
 		return this.repository.bySubscriber(subscriber);
 	}
 }

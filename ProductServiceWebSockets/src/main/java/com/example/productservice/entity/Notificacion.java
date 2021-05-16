@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 
 import lombok.Data;
 import lombok.ToString;
@@ -15,6 +16,7 @@ public class Notificacion {
 	@Id
 	private Integer id; 
 	private Integer idproduct;
+	@Column
 	private String usuario, titulo, descripcion, subscriber;
 	private LocalDate fecha_inicio;
 	private LocalDate fecha_final;
