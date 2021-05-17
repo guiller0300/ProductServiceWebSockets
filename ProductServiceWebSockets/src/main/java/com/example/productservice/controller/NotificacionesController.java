@@ -30,7 +30,7 @@ public class NotificacionesController {
 		return this.service.getAll();
 	}
 	@GetMapping
-	public Flux<Notificacion> byIdSocket(@RequestParam("subscriber") String subscriber){
+	public Flux<Notificacion> byIdSocket(String subscriber){
 		return this.service.getAllBySubscriber(subscriber);	
 	}
 
