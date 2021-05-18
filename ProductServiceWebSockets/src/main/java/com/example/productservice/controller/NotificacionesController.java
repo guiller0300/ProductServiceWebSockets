@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.productservice.dto.NotificacionesDto;
+import com.example.productservice.dto.NotificacionDto;
 import com.example.productservice.entity.Notificacion;
 import com.example.productservice.service.NotificacionesService;
 
@@ -26,11 +26,11 @@ public class NotificacionesController {
 	private NotificacionesService service;
 	
 	@GetMapping("all")
-	public Flux<NotificacionesDto> all(){
+	public Flux<NotificacionDto> all(){
 		return this.service.getAll();
 	}
 	@GetMapping
-	public Flux<Notificacion> byIdSocket(String subscriber){
+	public Flux<Notificacion> byIdSocket(@RequestParam int subscriber){
 		return this.service.getAllBySubscriber(subscriber);	
 	}
 

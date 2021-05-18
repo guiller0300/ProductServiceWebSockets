@@ -2,13 +2,11 @@ package com.example.productservice.controller;
 
 import java.time.Duration;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.productservice.dto.NotificacionDto;
 import com.example.productservice.dto.ProductDto;
 import com.example.productservice.dto.ProductRequestDto;
 import com.example.productservice.entity.Notificacion;
@@ -19,12 +17,12 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Controller
-public class ProductSocketController {
+public class RSocketController {
 	
 	private final ProductService service;
 	private final NotificacionesService notify;
 	
-	public ProductSocketController(ProductService service, NotificacionesService notify) {
+	public RSocketController(ProductService service, NotificacionesService notify) {
 		this.service = service;
 		this.notify = notify;
 	}
@@ -41,12 +39,15 @@ public class ProductSocketController {
 	}
 	
 	@MessageMapping("by.subscriber")
-	public Flux<Notificacion> getBySubscriber(String subscriber){
-		
-		subscriber = subscriber.replace("\"", "");  
-		System.out.println(subscriber);
+	public Flux<Notificacion> getBySubscriber(int subscriber){
+		/*subscriber = subscriber.replace("\"", "");  
+		System.out.println(subscriber);*/
 		return this.notify.getAllBySubscriber(subscriber)
 				.defaultIfEmpty(new Notificacion());
+	}
+	@MessageMapping("insert.notification")
+	public Mono<NotificacionDto> insertNotificacion(@Payload Mono<NotificacionDto> notificacion){
+		return this.notify.insertNotificacion(notificacion);
 	}
 	@MessageMapping("insert.product")
 	public Mono<ProductDto> insertProduct(@Payload Mono<ProductDto> product){

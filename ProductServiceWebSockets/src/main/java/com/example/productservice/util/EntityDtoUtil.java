@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.beans.BeanUtils;
 
-import com.example.productservice.dto.NotificacionesDto;
+import com.example.productservice.dto.NotificacionDto;
 import com.example.productservice.dto.ProductDto;
 import com.example.productservice.dto.TransactionRequestDto;
 import com.example.productservice.dto.TransactionResponseDto;
@@ -61,13 +61,13 @@ public class EntityDtoUtil {
 	}
 	
 	//EntityDto Notificaciones
-	public static NotificacionesDto toDto(Notificacion notificaciones) {
-		NotificacionesDto dto = new NotificacionesDto();
+	public static NotificacionDto toDto(Notificacion notificaciones) {
+		NotificacionDto dto = new NotificacionDto();
 		BeanUtils.copyProperties(notificaciones, dto);
 		return dto;
 	}
 	
-	public static Notificacion toEntity(NotificacionesDto notificacionesDto) {
+	public static Notificacion toEntity(NotificacionDto notificacionesDto) {
 		Notificacion notificaciones = new Notificacion();
 		BeanUtils.copyProperties(notificacionesDto, notificaciones);
 		return notificaciones;

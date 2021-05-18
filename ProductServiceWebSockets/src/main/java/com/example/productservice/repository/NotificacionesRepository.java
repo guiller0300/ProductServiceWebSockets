@@ -14,6 +14,6 @@ public interface NotificacionesRepository extends R2dbcRepository<Notificacion, 
 
 @Query
 (value = "select * from notificacion where subscriber = :subscriber or subscriber is null")
-Flux<Notificacion> bySubscriber(String subscriber);
+Flux<Notificacion> bySubscriber(int subscriber);
 
 }
