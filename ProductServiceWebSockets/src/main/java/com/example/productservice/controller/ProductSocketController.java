@@ -41,7 +41,10 @@ public class ProductSocketController {
 	}
 	
 	@MessageMapping("by.subscriber")
-	public Flux<Notificacion> getBySubscriber(@Payload String subscriber){
+	public Flux<Notificacion> getBySubscriber(String subscriber){
+		
+		subscriber = subscriber.replace("\"", "");  
+		System.out.println(subscriber);
 		return this.notify.getAllBySubscriber(subscriber)
 				.defaultIfEmpty(new Notificacion());
 	}

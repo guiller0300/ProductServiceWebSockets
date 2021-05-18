@@ -13,7 +13,7 @@ import reactor.core.publisher.Flux;
 public interface NotificacionesRepository extends R2dbcRepository<Notificacion, Integer> {
 
 @Query
-(value = "select * from notificacion where subscriber = :subscriber")
+(value = "select * from notificacion where subscriber = :subscriber or subscriber is null")
 Flux<Notificacion> bySubscriber(String subscriber);
 
 }
