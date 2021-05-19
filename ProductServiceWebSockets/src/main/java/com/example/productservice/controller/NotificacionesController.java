@@ -33,5 +33,4 @@ public class NotificacionesController {
 	public Flux<Notificacion> byIdSocket(@RequestParam int subscriber){
 		return this.service.getAllBySubscriber(subscriber);	
 	}
-
 }
