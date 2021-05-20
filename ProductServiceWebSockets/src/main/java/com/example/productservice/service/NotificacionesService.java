@@ -26,6 +26,10 @@ public class NotificacionesService {
 	public Flux<Notificacion> getAllBySubscriber(int subscriber){
 		return this.repository.bySubscriber(subscriber);
 	}
+	
+	public Mono<Notificacion> setRead(int id, int subscriber){
+		return this.repository.setReadNotification(id, subscriber);
+	}
 
 	public Mono<NotificacionDto> insertNotificacion(Mono<NotificacionDto> notificacionDto) {
 		return notificacionDto

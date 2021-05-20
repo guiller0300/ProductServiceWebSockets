@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,9 +18,10 @@ import com.example.productservice.entity.Notificacion;
 import com.example.productservice.service.NotificacionesService;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("notificaciones")
-@CrossOrigin(origins= "*", methods = {RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins= "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT})
 public class NotificacionesController {
 	
 	@Autowired
@@ -32,5 +34,11 @@ public class NotificacionesController {
 	@GetMapping
 	public Flux<Notificacion> byIdSocket(@RequestParam int subscriber){
 		return this.service.getAllBySubscriber(subscriber);	
+	}
+	
+	@PutMapping("{id}/{subscriber}")
+	public Mono<Notificacion> setRead(@PathVariable int id, @PathVariable int subscriber){
+		return this.service.setRead(id, subscriber);
+		
 	}
 }

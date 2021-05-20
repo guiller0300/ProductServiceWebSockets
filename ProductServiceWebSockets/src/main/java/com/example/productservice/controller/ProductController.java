@@ -42,12 +42,12 @@ public class ProductController {
 		return this.service.getAll();
 	}
 	
-	/*@GetMapping(value = "/socket/all", produces = MediaType.TEXT_EVENT_STREAM_VALUE) //RSocket Retrieve all
+	@GetMapping(value = "/socket/all", produces = MediaType.TEXT_EVENT_STREAM_VALUE) //RSocket Retrieve all
 	public Flux<ProductDto> allBySocket(){
 		return this.requester.flatMapMany(r -> r.route("todos")
 				.data(new ProductRequestDto())
 				.retrieveFlux(ProductDto.class));
-	}*/
+	}
 	
 	@GetMapping(value = "/socket/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE) //RSocket Retrieve by id
 	public Mono<ProductDto> byIdSocket(@PathVariable int id){
