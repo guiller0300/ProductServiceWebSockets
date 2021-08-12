@@ -36,8 +36,8 @@ public class ProductService {
 		return productDtoMono
 				.map(EntityDtoUtil::toEntity)
 				.flatMap(this.repository::save)
-				.map(EntityDtoUtil::toDto);
-				//.doOnNext(this.sink::tryEmitNext);
+				.map(EntityDtoUtil::toDto)
+				.doOnNext(this.sink::tryEmitNext);
 	}
 	public Mono<ProductDto> insertProduct(Mono<ProductDto> productDtoMono, String subscriber){
 		return  productDtoMono

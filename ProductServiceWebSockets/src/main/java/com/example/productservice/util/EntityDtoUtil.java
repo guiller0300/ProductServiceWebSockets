@@ -10,10 +10,12 @@ import com.example.productservice.dto.TransactionRequestDto;
 import com.example.productservice.dto.TransactionResponseDto;
 import com.example.productservice.dto.TransactionStatus;
 import com.example.productservice.dto.UserDto;
+import com.example.productservice.dto.UsuarioDto;
 import com.example.productservice.entity.Notificacion;
 import com.example.productservice.entity.Products;
 import com.example.productservice.entity.User;
 import com.example.productservice.entity.UserTransaction;
+import com.example.productservice.entity.Usuario;
 
 public class EntityDtoUtil {
 	
@@ -71,5 +73,18 @@ public class EntityDtoUtil {
 		Notificacion notificaciones = new Notificacion();
 		BeanUtils.copyProperties(notificacionesDto, notificaciones);
 		return notificaciones;
+	}
+	
+	//EntityDto Usuario
+	
+	public static UsuarioDto toDto(Usuario usuario) {
+		UsuarioDto dto = new UsuarioDto();
+		BeanUtils.copyProperties(usuario, dto);
+		return dto;
+	}
+	public static Usuario toEntity(UsuarioDto usuarioDto) {
+		Usuario usuario = new Usuario();
+		BeanUtils.copyProperties(usuarioDto, usuario);
+		return usuario;
 	}
 }

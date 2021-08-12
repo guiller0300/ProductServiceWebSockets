@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 public interface NotificacionesRepository extends R2dbcRepository<Notificacion, Integer> {
 
 @Query
-(value = "select * from notificacion where subscriber = :subscriber or subscriber is null")
+(value = "select * from notificacion where subscriber = :subscriber or subscriber = 0")
 Flux<Notificacion> bySubscriber(int subscriber);
 
 @Modifying

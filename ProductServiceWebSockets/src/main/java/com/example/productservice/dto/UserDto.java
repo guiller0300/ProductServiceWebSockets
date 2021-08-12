@@ -1,5 +1,7 @@
 package com.example.productservice.dto;
 
+import org.springframework.data.annotation.Id;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -7,6 +9,7 @@ import lombok.ToString;
 @ToString
 public class UserDto {
 	
+	@Id
 	private Integer id;
 	private String name;
 	private Integer balance;
